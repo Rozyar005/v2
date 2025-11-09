@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dinosaur AR Viewer</title>
+
+  <!-- Load Google's model-viewer library -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      padding: 15px;
+      background-color: #111;
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 8px;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0099ff;
+      transform: scale(1.05);
+      box-shadow: 0 0 8px #00aaff;
+    }
+
+    model-viewer {
+      flex-grow: 1;
+      width: 100%;
+      background-color: #000;
+    }
+
+    footer {
+      background-color: #111;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+      border-top: 1px solid #333;
+      text-shadow: 0 0 5px #999, 0 0 10px #ccc, 0 0 15px #aaa;
+      letter-spacing: 0.5px;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #888, 0 0 10px #bbb, 0 0 15px #aaa; }
+      to { text-shadow: 0 0 10px #fff, 0 0 20px #ccc, 0 0 30px #aaa; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>🦖 Tap “View in your space” to see the dinosaur in AR</h2>
+    <audio id="narration" src="https://rozyar005.github.io/dinosaur-ar/Dinasours.m4a"></audio>
+    <div>
+      <button onclick="document.getElementById('narration').play()">🔊 Play Narration</button>
+      <button onclick="document.getElementById('narration').pause()">⏸️ Pause</button>
+    </div>
+  </header>
+
+  <model-viewer 
+    src="https://rozyar005.github.io/dinosaur-ar/pbr_velociraptor_animated.glb"
+    alt="Velociraptor Dinosaur"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    auto-rotate
+    exposure="1">
+  </model-viewer>
+
+  <footer>
+    <p>© All rights reserved to the team of RAR — Rozyar Ayman Rozi 2025</p>
+  </footer>
+</body>
+</html>
