@@ -26,12 +26,20 @@
       background-color: #111;
       box-shadow: 0 2px 5px rgba(255, 255, 255, 0.2);
       position: relative;
-      z-index: 2;
+      z-index: 3;
     }
 
     h2 {
       margin: 0;
       font-size: 1.1rem;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
     }
 
     button {
@@ -42,7 +50,6 @@
       font-size: 15px;
       border-radius: 8px;
       cursor: pointer;
-      margin: 8px 5px;
       transition: all 0.3s ease;
     }
 
@@ -50,6 +57,27 @@
       background-color: #0099ff;
       transform: scale(1.05);
       box-shadow: 0 0 8px #00aaff;
+    }
+
+    #arButton {
+      background-color: #00c2ff;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px #00ffff;
+      position: absolute;
+      right: 15px;
+      top: 55px;
+      transition: 0.3s;
+    }
+
+    #arButton:hover {
+      background-color: #00eaff;
+      transform: scale(1.1);
     }
 
     model-viewer {
@@ -73,38 +101,23 @@
       from { text-shadow: 0 0 5px #888, 0 0 10px #bbb, 0 0 15px #aaa; }
       to { text-shadow: 0 0 10px #fff, 0 0 20px #ccc, 0 0 30px #aaa; }
     }
-
-    /* 👇 Move the AR button (cube) to the top-right corner */
-    model-viewer::part(default-ar-button) {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 3;
-      background-color: #007bff !important;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      box-shadow: 0 0 10px #00aaff;
-      transition: 0.3s;
-    }
-
-    model-viewer::part(default-ar-button):hover {
-      background-color: #0099ff !important;
-      transform: scale(1.1);
-    }
   </style>
 </head>
 <body>
   <header>
     <h2>🦖 Tap “View in your space” to see the dinosaur in AR</h2>
+
     <audio id="narration" src="https://rozyar005.github.io/dinosaur-ar/Dinasours.m4a"></audio>
-    <div>
+
+    <div class="controls">
       <button onclick="document.getElementById('narration').play()">🔊 Play Narration</button>
       <button onclick="document.getElementById('narration').pause()">⏸️ Pause</button>
+      <button id="arButton" title="View in AR">🕶️</button>
     </div>
   </header>
 
   <model-viewer 
+    id="dino"
     src="https://rozyar005.github.io/dinosaur-ar/pbr_velociraptor_animated.glb"
     alt="Velociraptor Dinosaur"
     ar
@@ -117,5 +130,12 @@
   <footer>
     <p>© All rights reserved to the team of RAR — Rozyar Ayman Rozi 2025</p>
   </footer>
+
+  <script>
+    // make the custom AR button work
+    const modelViewer = document.getElementById('dino');
+    const arButton = document.getElementById('arButton');
+    arButton.addEventListener('click', () => modelViewer.activateAR());
+  </script>
 </body>
 </html>
